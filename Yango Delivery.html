@@ -1,0 +1,541 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>E-Bike Rider Manual</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+Ethiopic:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout: one long bilingual manual. Sticky bar with section nav and an English / Amharic switch, hero with four rules,
+     the job, a ten-step order guide with a photo slot per step, first week as a vertical route, checklist and filterable guides.
+     Road-sign type, hi-vis orange used sparingly. */
+  :root {
+    --bg: #F0F3EE;
+    --surface: #FFFFFF;
+    --ink: #14211B;
+    --muted: #4F5E56;
+    --line: #D2DAD2;
+    --accent: #FF5A1F;
+    --on-accent: #14211B;
+    --green: #0E5A43;
+    --green-soft: #DDEBE3;
+    --focus: #0E5A43;
+    --font-display: "Barlow Condensed", "Noto Sans Ethiopic", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Public Sans", "Noto Sans Ethiopic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "IBM Plex Mono", "Noto Sans Ethiopic", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1714;
+      --surface: #172320;
+      --ink: #E8EEE9;
+      --muted: #9CABA3;
+      --line: #2B3B35;
+      --accent: #FF7A45;
+      --on-accent: #10190F;
+      --green: #6FD3A8;
+      --green-soft: #1B3029;
+      --focus: #6FD3A8;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1714;
+    --surface: #172320;
+    --ink: #E8EEE9;
+    --muted: #9CABA3;
+    --line: #2B3B35;
+    --accent: #FF7A45;
+    --on-accent: #10190F;
+    --green: #6FD3A8;
+    --green-soft: #1B3029;
+    --focus: #6FD3A8;
+    color-scheme: dark;
+  }
+
+  /* Language switching */
+  .am { display: none; }
+  :root[data-lang="am"] .am { display: inline; }
+  :root[data-lang="am"] .en { display: none; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: auto; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  :root[data-lang="am"] body { line-height: 1.8; }
+  :root[data-lang="am"] h1, :root[data-lang="am"] h2, :root[data-lang="am"] h3 { line-height: 1.25; }
+  :root[data-lang="am"] .mono { letter-spacing: 0; text-transform: none; font-size: 0.82rem; }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 30; background: var(--surface);
+  }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+  a { color: var(--green); }
+
+  .wrap {
+    max-width: 1120px; margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1; }
+  p { margin: 0; }
+  .mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 31;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; gap: 16px; min-height: 56px; }
+  .brand { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; flex: none; }
+  .brand b { background: var(--accent); color: var(--on-accent); padding: 0 6px; margin-right: 6px; }
+  .nav { display: flex; gap: 2px; overflow-x: auto; min-width: 0; margin-left: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    color: var(--ink); text-decoration: none; white-space: nowrap;
+    font-weight: 600; font-size: 0.9rem; padding: 8px 10px; border-radius: 4px;
+  }
+  .nav a:hover { background: var(--green-soft); }
+  .lang { display: flex; flex: none; border: 2px solid var(--ink); border-radius: 4px; overflow: hidden; }
+  .lang button {
+    font: inherit; font-weight: 700; font-size: 0.88rem; cursor: pointer; color: var(--ink);
+    background: transparent; border: 0; padding: 6px 12px;
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  /* Hero */
+  .hero { padding-block: clamp(40px, 8vw, 88px) clamp(32px, 6vw, 56px); }
+  .tag {
+    display: inline-block; background: var(--accent); color: var(--on-accent);
+    padding: 4px 10px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  :root[data-lang="am"] .tag { letter-spacing: 0; font-size: 0.85rem; }
+  .hero h1 {
+    font-weight: 800; text-transform: uppercase; letter-spacing: -0.005em;
+    font-size: clamp(3.4rem, 13vw, 8.5rem); margin-top: 20px; line-height: 0.88;
+  }
+  :root[data-lang="am"] .hero h1 { font-size: clamp(2.4rem, 9vw, 5.5rem); line-height: 1.2; letter-spacing: 0; }
+  .hero h1 .g { color: var(--green); }
+  .lead { font-size: clamp(1.1rem, 2.4vw, 1.35rem); max-width: 56ch; margin-top: 24px; color: var(--muted); }
+  .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: clamp(32px, 6vw, 56px); }
+  .rule { background: var(--surface); border-top: 4px solid var(--accent); padding: 16px 18px 20px; min-width: 0; }
+  .rule .mono { color: var(--muted); }
+  .rule h3 { font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-top: 8px; }
+  .rule p { font-size: 0.95rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  /* Sections */
+  section.block { padding-block: clamp(40px, 7vw, 80px); border-top: 1px solid var(--line); scroll-margin-top: calc(56px + env(safe-area-inset-top, 0px)); }
+  .kicker { color: var(--green); }
+  .block h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800; text-transform: uppercase; margin-top: 8px; }
+  :root[data-lang="am"] .block h2 { font-size: clamp(1.9rem, 5vw, 3rem); }
+  .sub { color: var(--muted); max-width: 60ch; margin-top: 14px; }
+  h3.small { font-size: 1.5rem; font-weight: 700; text-transform: uppercase; }
+
+  /* The job */
+  .job-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 5vw, 64px); margin-top: 36px; }
+  .job-grid > * { min-width: 0; }
+  .prose p + p { margin-top: 14px; }
+  .prose h3 { margin-bottom: 12px; }
+  .flow { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: step; }
+  .flow li { counter-increment: step; border-bottom: 1px solid var(--line); }
+  .flow a {
+    display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 10px 0;
+    color: var(--ink); text-decoration: none;
+  }
+  .flow a:hover strong { text-decoration: underline; text-decoration-thickness: 2px; }
+  .flow a::before {
+    content: counter(step); font-family: var(--font-display); font-weight: 800; font-size: 1.3rem;
+    width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: var(--surface);
+    display: grid; place-items: center; line-height: 1;
+  }
+  :root[data-theme="dark"] .flow a::before { color: var(--bg); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .flow a::before { color: var(--bg); } }
+  .flow strong { font-weight: 700; }
+  .flow .mono { color: var(--muted); }
+
+  .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+  .panel { background: var(--surface); padding: 24px; min-width: 0; }
+  .panel ul { margin: 14px 0 0; padding-left: 1.1em; }
+  .panel li + li { margin-top: 8px; }
+
+  .terms { margin-top: 16px; background: var(--surface); padding: 24px; }
+  .terms .head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; }
+  .terms .head p { color: var(--muted); font-size: 0.92rem; max-width: 48ch; }
+  dl.terms-list { margin: 18px 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; }
+  .terms-list div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); align-items: baseline; min-width: 0; }
+  .terms-list dt { font-weight: 700; }
+  .terms-list dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .ph { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); border: 1px dashed var(--muted); padding: 2px 8px; border-radius: 3px; display: inline-block; }
+
+  /* Order guide */
+  .steps { margin-top: 32px; }
+  .step {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: clamp(20px, 4vw, 56px);
+    padding-block: 36px; border-top: 1px solid var(--line);
+    scroll-margin-top: calc(56px + env(safe-area-inset-top, 0px));
+  }
+  .step-text { min-width: 0; }
+  .step-head { display: flex; align-items: center; gap: 14px; }
+  .num { font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--green); }
+  .phase { padding: 3px 10px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  :root[data-lang="am"] .phase { letter-spacing: 0; font-size: 0.82rem; }
+  .phase.start { background: var(--green-soft); color: var(--green); }
+  .phase.pickup { background: var(--accent); color: var(--on-accent); }
+  .phase.delivery { background: var(--ink); color: var(--bg); }
+  .step h3 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); font-weight: 800; text-transform: uppercase; margin-top: 10px; }
+  :root[data-lang="am"] .step h3 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+  .step .lead2 { color: var(--muted); margin-top: 10px; max-width: 56ch; }
+  .step ul { margin: 16px 0 0; padding-left: 1.1em; max-width: 60ch; }
+  .step li + li { margin-top: 8px; }
+  .watch { margin-top: 16px; padding: 12px 16px; background: var(--surface); border: 2px solid var(--accent); border-radius: 4px; max-width: 60ch; }
+  .watch b { display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; font-weight: 500; }
+  :root[data-lang="am"] .watch b { letter-spacing: 0; font-size: 0.82rem; }
+  figure.shot { margin: 0; min-width: 0; align-self: start; }
+  .slot {
+    aspect-ratio: 3 / 4; width: 100%; max-width: 300px; background: var(--green-soft);
+    border: 2px dashed var(--muted); border-radius: 6px; display: grid; align-content: center; justify-items: center; gap: 10px;
+    text-align: center; padding: 16px; color: var(--muted); overflow: hidden;
+  }
+  .slot svg { width: 44px; height: 44px; }
+  .slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  figure.shot figcaption { margin-top: 8px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 32px 48px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 32px; justify-content: space-between; }
+
+  @media (max-width: 900px) {
+    .rules { grid-template-columns: repeat(2, 1fr); }
+    .job-grid, .cols { grid-template-columns: 1fr; }
+    dl.terms-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .step { grid-template-columns: 1fr; }
+    .slot { max-width: 260px; aspect-ratio: 4 / 3; }
+  }
+  @media (max-width: 720px) {
+    .brand span { display: none; }
+  }
+  @media (max-width: 480px) {
+    .rules { grid-template-columns: 1fr; }
+    .terms-list div { grid-template-columns: 1fr; gap: 2px; }
+    .topbar .wrap { gap: 10px; }
+  }
+</style>
+<script>
+(function () {
+  var l = 'en';
+  try {
+    var s = localStorage.getItem('ebike-manual-lang');
+    if (s === 'am' || s === 'en') { l = s; }
+    else if ((navigator.language || '').toLowerCase().indexOf('am') === 0) { l = 'am'; }
+  } catch (e) {}
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.lang = l;
+})();
+</script>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><b><span class="en">E</span><span class="am">ኤ</span></b><span><span class="en">Rider Manual</span><span class="am">የነጂ መመሪያ</span></span></div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#job"><span class="en">The job</span><span class="am">ስራው</span></a>
+      <a href="#order"><span class="en">Handling an order</span><span class="am">ትዕዛዝ አያያዝ</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-l="en" aria-pressed="true">English</button>
+      <button type="button" data-l="am" aria-pressed="false" lang="am">አማርኛ</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="tag"><span class="en">For new riders</span><span class="am">ለአዲስ ነጂዎች</span></span>
+    <h1>
+      <span class="en">Ride safe.<br><span class="g">Ride well.</span></span>
+      <span class="am">በጥንቃቄ ይንዱ።<br><span class="g">በብቃት ይንዱ።</span></span>
+    </h1>
+    <p class="lead">
+      <span class="en">This is your manual for every delivery you make. Read the job, then follow the order guide every time you take a delivery.</span>
+      <span class="am">ይህ ለሚያደርጉት ለእያንዳንዱ ትዕዛዝ የሚሆን መመሪያዎ ነው። ስራውን ያንብቡ፣ ከዚያም ትዕዛዝ በወሰዱ ቁጥር የትዕዛዝ አያያዝ መመሪያውን ይከተሉ።</span>
+    </p>
+
+    <div class="rules" aria-label="The four rules">
+      <div class="rule">
+        <span class="mono"><span class="en">Rule</span><span class="am">ህግ</span></span>
+        <h3><span class="en">Helmet on</span><span class="am">የራስ ቁር ያድርጉ</span></h3>
+        <p><span class="en">Helmet and hi-vis vest on every trip, even a short one.</span><span class="am">በእያንዳንዱ ጉዞ፣ አጭር ቢሆንም፣ የራስ ቁርና አንጸባራቂ ሰደርያ ይልበሱ።</span></p>
+      </div>
+      <div class="rule">
+        <span class="mono"><span class="en">Rule</span><span class="am">ህግ</span></span>
+        <h3><span class="en">Swap at 20%</span><span class="am">20% ላይ ይቀይሩ</span></h3>
+        <p><span class="en">Check the battery before you accept an order. Charge or swap near 20%.</span><span class="am">ትዕዛዝ ከመቀበልዎ በፊት ባትሪውን ይመልከቱ። ወደ 20% ሲደርስ ይሙሉ ወይም ይቀይሩ።</span></p>
+      </div>
+      <div class="rule">
+        <span class="mono"><span class="en">Rule</span><span class="am">ህግ</span></span>
+        <h3><span class="en">Phone down</span><span class="am">ስልክ አይያዝ</span></h3>
+        <p><span class="en">No phone in your hand while the wheels turn. Stop, then look.</span><span class="am">ብስክሌቱ እየሄደ ስልክ በእጅዎ አይያዙ። ቆመው ይመልከቱ።</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE JOB -->
+  <section class="block" id="job">
+    <div class="wrap">
+      <span class="mono kicker"><span class="en">Section 1</span><span class="am">ክፍል 1</span></span>
+      <h2><span class="en">The job</span><span class="am">ስራው</span></h2>
+      <p class="sub">
+        <span class="en">You will deliver parcels by electric bike. You are the person the customer actually meets, so how you ride and how you hand over matters as much as speed.</span>
+        <span class="am">እሽጎችን በኤሌክትሪክ ብስክሌት ያደርሳሉ። ደንበኛው በአካል የሚያገኘው እርስዎን ነው፤ ስለዚህ አነዳደድዎና እሽጉን የሚያስረክቡበት መንገድ ከፍጥነት ያላነሰ አስፈላጊ ነው።</span>
+      </p>
+
+      <div class="job-grid">
+        <div class="prose">
+          <h3 class="small"><span class="en">What a rider does</span><span class="am">ነጂ ምን ይሰራል</span></h3>
+          <p>
+            <span class="en">Each shift you go online, receive orders, collect a parcel from the sender, ride it to the recipient, take payment when the order needs it, and confirm the delivery in the app. The electric motor helps you on hills and with heavy parcels, so you can cover more ground without arriving exhausted.</span>
+            <span class="am">በእያንዳንዱ ፈረቃ ኦንላይን ይገባሉ፣ ትዕዛዝ ይቀበላሉ፣ እሽጉን ከላኪው ወስደው ወደ ተቀባዩ ያደርሳሉ፣ ትዕዛዙ የሚጠይቅ ከሆነ ክፍያ ተቀብለው በመተግበሪያው ርክክቡን ያረጋግጣሉ። የኤሌክትሪክ ሞተሩ በዳገትና ከባድ እሽግ ሲይዙ ስለሚያግዝዎት ሳይደክሙ ብዙ መንገድ መሸፈን ይችላሉ።</span>
+          </p>
+          <p>
+            <span class="en">Good riders are on time, calm in traffic and easy to deal with at the door. They look after the bike and battery, because a bike that is charged and checked is a bike that earns.</span>
+            <span class="am">ጥሩ ነጂዎች በሰዓቱ የሚደርሱ፣ በትራፊክ መሃል የሚረጋጉና በበር ላይ ለመግባባት ቀላል ናቸው። ብስክሌቱንና ባትሪውን ይንከባከባሉ፤ ምክንያቱም የተሞላና የተፈተሸ ብስክሌት ገቢ ያስገኛል።</span>
+          </p>
+          <p>
+            <span class="en">Addis Ababa sits at roughly 2,355 metres and the streets climb and fall constantly. You will learn quickly how hills, loads and battery level work together.</span>
+            <span class="am">አዲስ አበባ ከባህር ወለል በላይ በግምት 2,355 ሜትር ላይ ትገኛለች፤ መንገዶቹም ያለማቋረጥ ዳገትና ቁልቁለት ናቸው። ዳገት፣ ጭነትና የባትሪ ደረጃ እንዴት እንደሚተሳሰሩ በፍጥነት ይለማመዳሉ።</span>
+          </p>
+        </div>
+        <div>
+          <h3 class="small"><span class="en">One order, start to finish</span><span class="am">አንድ ትዕዛዝ ከጅምር እስከ ፍጻሜ</span></h3>
+          <ol class="flow">
+            <li><a href="#step-1"><strong><span class="en">Go online</span><span class="am">ኦንላይን ይግቡ</span></strong><span class="mono"><span class="en">Start</span><span class="am">ጅምር</span></span></a></li>
+            <li><a href="#step-2"><strong><span class="en">Accept an order</span><span class="am">ትዕዛዝ ይቀበሉ</span></strong><span class="mono"><span class="en">Start</span><span class="am">ጅምር</span></span></a></li>
+            <li><a href="#step-3"><strong><span class="en">Check and confirm the sender</span><span class="am">ላኪውን ያረጋግጡ</span></strong><span class="mono"><span class="en">Pickup</span><span class="am">መቀበል</span></span></a></li>
+            <li><a href="#step-4"><strong><span class="en">Go to the sender</span><span class="am">ወደ ላኪው ይሂዱ</span></strong><span class="mono"><span class="en">Pickup</span><span class="am">መቀበል</span></span></a></li>
+            <li><a href="#step-5"><strong><span class="en">Accept the parcel</span><span class="am">እሽጉን ይረከቡ</span></strong><span class="mono"><span class="en">Pickup</span><span class="am">መቀበል</span></span></a></li>
+            <li><a href="#step-6"><strong><span class="en">Confirm the recipient</span><span class="am">ተቀባዩን ያረጋግጡ</span></strong><span class="mono"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></a></li>
+            <li><a href="#step-7"><strong><span class="en">Go to the recipient</span><span class="am">ወደ ተቀባዩ ይሂዱ</span></strong><span class="mono"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></a></li>
+            <li><a href="#step-8"><strong><span class="en">Accept payment</span><span class="am">ክፍያ ይቀበሉ</span></strong><span class="mono"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></a></li>
+            <li><a href="#step-9"><strong><span class="en">Give the parcel</span><span class="am">እሽጉን ያስረክቡ</span></strong><span class="mono"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></a></li>
+            <li><a href="#step-10"><strong><span class="en">Confirm delivery</span><span class="am">ርክክቡን ያረጋግጡ</span></strong><span class="mono"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></a></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="panel">
+          <h3 class="small"><span class="en">What we expect from you</span><span class="am">ከእርስዎ የምንጠብቀው</span></h3>
+          <ul>
+            <li><span class="en">Arrive on time for your shift with a charged phone and your gear.</span><span class="am">በፈረቃዎ ሰዓት የተሞላ ስልክና የደህንነት መሳሪያዎችዎን ይዘው ይድረሱ።</span></li>
+            <li><span class="en">Ride safely and follow local traffic rules.</span><span class="am">በጥንቃቄ ይንዱ፤ የአካባቢውን የትራፊክ ህጎች ይከተሉ።</span></li>
+            <li><span class="en">Treat senders and recipients with respect.</span><span class="am">ላኪዎችንና ተቀባዮችን በአክብሮት ይያዙ።</span></li>
+            <li><span class="en">Report problems with the bike, the battery or an order straight away.</span><span class="am">ስለ ብስክሌቱ፣ ባትሪው ወይም ትዕዛዙ ችግር ወዲያውኑ ያሳውቁ።</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="small"><span class="en">What you can expect from us</span><span class="am">ከእኛ የሚጠብቁት</span></h3>
+          <ul>
+            <li><span class="en">An orientation and a ride-along before you ride alone.</span><span class="am">ብቻዎን ከመስራትዎ በፊት ገለጻና አብሮ የመንዳት ልምምድ።</span></li>
+            <li><span class="en">A team lead you can call when something goes wrong.</span><span class="am">ችግር ሲፈጠር የሚደውሉለት የቡድን መሪ።</span></li>
+            <li><span class="en">Honest answers about how the work and the pay are set up.</span><span class="am">ስለ ስራው አሰራርና ክፍያ ግልጽ መልስ።</span></li>
+            <li><span class="en">Regular check-ins in your first weeks.</span><span class="am">በመጀመሪያዎቹ ሳምንታት ተከታታይ ክትትል።</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HANDLING AN ORDER -->
+  <section class="block" id="order">
+    <div class="wrap">
+      <span class="mono kicker"><span class="en">Section 2</span><span class="am">ክፍል 2</span></span>
+      <h2><span class="en">Handling an order</span><span class="am">ትዕዛዝ አያያዝ</span></h2>
+      <p class="sub"><span class="en">Ten steps from going online to confirming the delivery. Follow them in this order every time.</span><span class="am">ኦንላይን ከመግባት ጀምሮ ርክክቡን እስከማረጋገጥ ድረስ አስር ደረጃዎች። ሁልጊዜ በዚህ ቅደም ተከተል ይከተሉ።</span></p>
+
+      <div class="steps">
+
+        <article class="step" id="step-1">
+          <div class="step-text">
+            <div class="step-head"><span class="num">1</span><span class="phase start"><span class="en">Start</span><span class="am">ጅምር</span></span></div>
+            <h3><span class="en">Go online</span><span class="am">ኦንላይን ይግቡ</span></h3>
+            <p class="lead2"><span class="en">Get ready first, then switch the app to Online so orders can reach you.</span><span class="am">መጀመሪያ ይዘጋጁ፣ ከዚያም ትዕዛዝ እንዲደርስዎ መተግበሪያውን ኦንላይን ያድርጉ።</span></p>
+            <ul>
+              <li><span class="en">Check your tyres, brakes, lights and battery.</span><span class="am">ጎማዎችን፣ ብሬክን፣ መብራትንና ባትሪን ይፈትሹ።</span></li>
+              <li><span class="en">Make sure your phone is charged, mobile data is on and location is on.</span><span class="am">ስልክዎ የተሞላ፣ ዳታ የበራና ሎኬሽን የበራ መሆኑን ያረጋግጡ።</span></li>
+              <li><span class="en">Open the app, log in and switch to Online.</span><span class="am">መተግበሪያውን ከፍተው ይግቡና ኦንላይን ያድርጉ።</span></li>
+              <li><span class="en">Wait for orders somewhere safe.</span><span class="am">ትዕዛዝ እስኪመጣ ደህንነቱ በተጠበቀ ቦታ ይቆዩ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-1" role="img" aria-label="Photo for step 1"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 1</span><span class="am">ፎቶ 1</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-2">
+          <div class="step-text">
+            <div class="step-head"><span class="num">2</span><span class="phase start"><span class="en">Start</span><span class="am">ጅምር</span></span></div>
+            <h3><span class="en">Accept an order</span><span class="am">ትዕዛዝ ይቀበሉ</span></h3>
+            <p class="lead2"><span class="en">When an order arrives, read it before you accept.</span><span class="am">ትዕዛዝ ሲመጣ ከመቀበልዎ በፊት ያንብቡት።</span></p>
+            <ul>
+              <li><span class="en">Look at the pickup place, the drop-off place and the distance.</span><span class="am">የመቀበያ ቦታውን፣ የማድረሻ ቦታውንና ርቀቱን ይመልከቱ።</span></li>
+              <li><span class="en">Check your battery. Can you finish the whole order with charge to spare?</span><span class="am">ባትሪዎን ይመልከቱ። ሙሉውን ትዕዛዝ ጨርሰው ቀሪ ኃይል ይተርፍዎታል?</span></li>
+              <li><span class="en">Accept only the orders you can finish safely.</span><span class="am">በደህና መጨረስ የሚችሉትን ትዕዛዝ ብቻ ይቀበሉ።</span></li>
+              <li><span class="en">After you accept, do not drop the order unless you have a real problem. Call support if you do.</span><span class="am">ከተቀበሉ በኋላ እውነተኛ ችግር ከሌለ ትዕዛዙን አይተዉ። ችግር ካለ ለድጋፍ ይደውሉ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-2" role="img" aria-label="Photo for step 2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 2</span><span class="am">ፎቶ 2</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-3">
+          <div class="step-text">
+            <div class="step-head"><span class="num">3</span><span class="phase pickup"><span class="en">Pickup</span><span class="am">መቀበል</span></span></div>
+            <h3><span class="en">Check and confirm the sender</span><span class="am">ላኪውን ያረጋግጡ</span></h3>
+            <p class="lead2"><span class="en">Before you ride, make sure you know exactly who you are collecting from.</span><span class="am">ከመንዳትዎ በፊት ከማን እንደሚቀበሉ በትክክል ይወቁ።</span></p>
+            <ul>
+              <li><span class="en">Read the sender's name, phone number and pickup address in the order.</span><span class="am">በትዕዛዙ ላይ ያለውን የላኪውን ስም፣ ስልክ ቁጥርና የመቀበያ አድራሻ ያንብቡ።</span></li>
+              <li><span class="en">Call or message the sender. Confirm they are ready and where to meet.</span><span class="am">ለላኪው ደውለው ወይም መልዕክት ልከው ዝግጁ መሆናቸውንና የት እንደሚገናኙ ያረጋግጡ።</span></li>
+              <li><span class="en">If the details look wrong or the sender does not answer, contact support before you ride.</span><span class="am">መረጃው ስህተት መስሎ ከታየ ወይም ላኪው ካልመለሰ፣ ከመንዳትዎ በፊት ድጋፍን ያነጋግሩ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-3" role="img" aria-label="Photo for step 3"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 3</span><span class="am">ፎቶ 3</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-4">
+          <div class="step-text">
+            <div class="step-head"><span class="num">4</span><span class="phase pickup"><span class="en">Pickup</span><span class="am">መቀበል</span></span></div>
+            <h3><span class="en">Go to the sender</span><span class="am">ወደ ላኪው ይሂዱ</span></h3>
+            <p class="lead2"><span class="en">Ride safely to the pickup address. Arriving on time matters, arriving safely matters more.</span><span class="am">ወደ መቀበያ አድራሻው በጥንቃቄ ይንዱ። በሰዓቱ መድረስ አስፈላጊ ነው፤ በደህና መድረስ ደግሞ ይበልጣል።</span></p>
+            <ul>
+              <li><span class="en">Follow the route on your mounted phone. Stop before you look at it closely.</span><span class="am">በስልክ መያዣ ላይ ያለውን መንገድ ይከተሉ። በደንብ ለማየት ሲፈልጉ ቆመው ይመልከቱ።</span></li>
+              <li><span class="en">Park somewhere safe and lock the bike.</span><span class="am">ደህንነቱ በተጠበቀ ቦታ አቁመው ብስክሌቱን ይቆልፉ።</span></li>
+              <li><span class="en">Tell the sender you have arrived.</span><span class="am">መድረስዎን ለላኪው ያሳውቁ።</span></li>
+              <li><span class="en">Make sure you are in 100M radius of the senders location and confirm arrived on the app.</span><span class="am">በ100 ሜትር ርቀት ሆነው ድርሻለው ይበሉ በመተግብሪያው</span></li>
+            </ul>
+          <figure class="shot"><div class="slot" id="photo-4" role="img" aria-label="Photo for step 4"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 4</span><span class="am">ፎቶ 4</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-5">
+          <div class="step-text">
+            <div class="step-head"><span class="num">5</span><span class="phase pickup"><span class="en">Pickup</span><span class="am">መቀበል</span></span></div>
+            <h3><span class="en">Accept the parcel</span><span class="am">እሽጉን ይረከቡ</span></h3>
+            <p class="lead2"><span class="en">Look at the parcel with the sender before you take it.</span><span class="am">እሽጉን ከመረከብዎ በፊት ከላኪው ጋር ሆነው ይመልከቱት።</span></p>
+            <ul>
+              <li><span class="en">Check it is closed, undamaged and a size you can carry safely.</span><span class="am">የተዘጋ፣ ያልተጎዳና በደህና ሊሸከሙት የሚችሉት መጠን መሆኑን ያረጋግጡ።</span></li>
+              <li><span class="en">Ask the sender what is inside if you are not sure.</span><span class="am">እርግጠኛ ካልሆኑ በውስጡ ምን እንዳለ ላኪውን ይጠይቁ።</span></li>
+              <li><span class="en">Secure it in the box or on the rack, then confirm the pickup in the app.</span><span class="am">በሳጥኑ ወይም በመሸከሚያው ላይ በደንብ አስረው ይያዙት፤ ከዚያም በመተግበሪያው ላይ መቀበልዎን ያረጋግጡ።</span></li>
+            </ul>
+            <div class="watch"><b><span class="en">Watch out</span><span class="am">ጥንቃቄ</span></b><span class="en">Do not take a parcel that is leaking, badly damaged, or that the sender will not describe. Call support.</span><span class="am">የሚያፈስ፣ በጣም የተጎዳ ወይም ላኪው ምን እንደሆነ የማይነግርዎትን እሽግ አይቀበሉ። ለድጋፍ ይደውሉ።</span></div>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-5" role="img" aria-label="Photo for step 5"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 5</span><span class="am">ፎቶ 5</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-6">
+          <div class="step-text">
+            <div class="step-head"><span class="num">6</span><span class="phase delivery"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></div>
+            <h3><span class="en">Confirm the recipient</span><span class="am">ተቀባዩን ያረጋግጡ</span></h3>
+            <p class="lead2"><span class="en">Now do the same check for the person you are delivering to.</span><span class="am">አሁን ለሚያደርሱለት ሰው ተመሳሳይ ማረጋገጫ ያድርጉ።</span></p>
+            <ul>
+              <li><span class="en">Read the recipient's name, phone number and drop-off address.</span><span class="am">የተቀባዩን ስም፣ ስልክ ቁጥርና የማድረሻ አድራሻ ያንብቡ።</span></li>
+              <li><span class="en">Call the recipient. Confirm they are there, and ask for a landmark if the address is unclear.</span><span class="am">ለተቀባዩ ደውለው እዚያ መሆናቸውን ያረጋግጡ፤ አድራሻው ግልጽ ካልሆነ የአካባቢ መለያ ምልክት ይጠይቁ።</span></li>
+              <li><span class="en">Check in the order whether there is a payment to collect, and how much.</span><span class="am">በትዕዛዙ ላይ የሚሰበሰብ ክፍያ መኖሩንና መጠኑን ይመልከቱ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-6" role="img" aria-label="Photo for step 6"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 6</span><span class="am">ፎቶ 6</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-7">
+          <div class="step-text">
+            <div class="step-head"><span class="num">7</span><span class="phase delivery"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></div>
+            <h3><span class="en">Go to the recipient</span><span class="am">ወደ ተቀባዩ ይሂዱ</span></h3>
+            <p class="lead2"><span class="en">Ride with the parcel the way you would ride with something fragile.</span><span class="am">እሽጉን እንደሚሰበር ነገር በጥንቃቄ ይዘው ይንዱ።</span></p>
+            <ul>
+              <li><span class="en">Check the parcel is still secure after the first bumps.</span><span class="am">ከመጀመሪያዎቹ ጉድጓዶች በኋላ እሽጉ አሁንም በደንብ መታሰሩን ያረጋግጡ።</span></li>
+              <li><span class="en">Watch your battery on the way, especially on hills.</span><span class="am">በመንገድ ላይ ባትሪዎን በተለይ በዳገት ላይ ይከታተሉ።</span></li>
+              <li><span class="en">Park, lock the bike, and tell the recipient you have arrived.</span><span class="am">አቁመው ብስክሌቱን ቆልፈው መድረስዎን ለተቀባዩ ያሳውቁ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-7" role="img" aria-label="Photo for step 7"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 7</span><span class="am">ፎቶ 7</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-8">
+          <div class="step-text">
+            <div class="step-head"><span class="num">8</span><span class="phase delivery"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></div>
+            <h3><span class="en">Accept payment</span><span class="am">ክፍያ ይቀበሉ</span></h3>
+            <p class="lead2"><span class="en">Some orders are paid on delivery. If this one is, take the payment before you hand over the parcel.</span><span class="am">አንዳንድ ትዕዛዞች ሲደርሱ ይከፈላሉ። ይህ ትዕዛዝ እንደዚያ ከሆነ እሽጉን ከማስረከብዎ በፊት ክፍያውን ይቀበሉ።</span></p>
+            <ul>
+              <li><span class="en">Say the amount shown in the app out loud.</span><span class="am">በመተግበሪያው ላይ የሚታየውን መጠን ጮክ ብለው ይናገሩ።</span></li>
+              <li><span class="en">Count the money in front of the customer.</span><span class="am">ገንዘቡን በደንበኛው ፊት ይቁጠሩ።</span></li>
+              <li><span class="en">Give the right change.</span><span class="am">ተመላሽ ገንዘብ በትክክል ይስጡ።</span></li>
+              <li><span class="en">If the order is already paid in the app, skip this step.</span><span class="am">ትዕዛዙ በመተግበሪያው አስቀድሞ የተከፈለ ከሆነ ይህን ደረጃ ይዝለሉት።</span></li>
+            </ul>
+            <div class="watch"><b><span class="en">Watch out</span><span class="am">ጥንቃቄ</span></b><span class="en">If the customer disagrees about the amount, stay calm and call support.</span><span class="am">ደንበኛው በመጠኑ ላይ ካልተስማማ ይረጋጉና ለድጋፍ ይደውሉ።</span></div>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-8" role="img" aria-label="Photo for step 8"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 8</span><span class="am">ፎቶ 8</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-9">
+          <div class="step-text">
+            <div class="step-head"><span class="num">9</span><span class="phase delivery"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></div>
+            <h3><span class="en">Give the parcel</span><span class="am">እሽጉን ያስረክቡ</span></h3>
+            <p class="lead2"><span class="en">Hand the parcel to the person named in the order.</span><span class="am">እሽጉን በትዕዛዙ ላይ ለተጠቀሰው ሰው ያስረክቡ።</span></p>
+            <ul>
+              <li><span class="en">Confirm their name once more before you hand it over.</span><span class="am">ከማስረከብዎ በፊት ስማቸውን አንድ ጊዜ እንደገና ያረጋግጡ።</span></li>
+              <li><span class="en">Hand it over with both hands and let them check it.</span><span class="am">በሁለት እጅ ያስረክቡና እንዲያዩት ይፍቀዱላቸው።</span></li>
+              <li><span class="en">If the recipient is not there, call them and wait a reasonable time. Then call support.</span><span class="am">ተቀባዩ ከሌለ ደውለው ምክንያታዊ ጊዜ ይጠብቁ፤ ከዚያ ለድጋፍ ይደውሉ።</span></li>
+            </ul>
+            <div class="watch"><b><span class="en">Watch out</span><span class="am">ጥንቃቄ</span></b><span class="en">Never leave the parcel with a stranger.</span><span class="am">እሽጉን ለማያውቁት ሰው በፍጹም አይተዉ።</span></div>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-9" role="img" aria-label="Photo for step 9"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 9</span><span class="am">ፎቶ 9</span></figcaption></figure>
+        </article>
+
+        <article class="step" id="step-10">
+          <div class="step-text">
+            <div class="step-head"><span class="num">10</span><span class="phase delivery"><span class="en">Delivery</span><span class="am">ማድረስ</span></span></div>
+            <h3><span class="en">Confirm delivery</span><span class="am">ርክክቡን ያረጋግጡ</span></h3>
+            <p class="lead2"><span class="en">The order is not finished until it is finished in the app.</span><span class="am">ትዕዛዙ በመተግበሪያው ላይ እስካልተጠናቀቀ ድረስ አልተጠናቀቀም።</span></p>
+            <ul>
+              <li><span class="en">Mark the order as delivered in the app and complete anything else it asks for.</span><span class="am">ትዕዛዙን በመተግበሪያው ላይ እንደደረሰ ምልክት ያድርጉና ሌላ የሚጠይቀውን ሁሉ ያጠናቅቁ።</span></li>
+              <li><span class="en">Look at your battery before you take the next order.</span><span class="am">ቀጣዩን ትዕዛዝ ከመቀበልዎ በፊት ባትሪዎን ይመልከቱ።</span></li>
+              <li><span class="en">Stay online for the next order, or go offline if your shift is over.</span><span class="am">ለቀጣይ ትዕዛዝ ኦንላይን ይቆዩ፤ ፈረቃዎ ካለቀ ኦፍላይን ይሁኑ።</span></li>
+            </ul>
+          </div>
+          <figure class="shot"><div class="slot" id="photo-10" role="img" aria-label="Photo for step 10"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v22H6z"/><circle cx="24" cy="26" r="7"/></svg><span class="mono"><span class="en">Photo for this step</span><span class="am">ለዚህ ደረጃ የሚሆን ፎቶ</span></span></div><figcaption class="mono"><span class="en">Photo 10</span><span class="am">ፎቶ 10</span></figcaption></figure>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span class="en">Questions about anything in this manual? Ask your team lead.</span><span class="am">ስለዚህ መመሪያ ጥያቄ አለዎት? የቡድን መሪዎን ይጠይቁ።</span></p>
+    <p class="mono"><span class="en">Updated October 2026</span><span class="am">የተሻሻለው ጥቅምት 2019</span></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var LANG_KEY = 'ebike-manual-lang';
+
+  /* Language switch */
+  var langBtns = document.querySelectorAll('.lang button');
+  function currentLang() { return root.getAttribute('data-lang') === 'am' ? 'am' : 'en'; }
+  function setLang(l) {
+    root.setAttribute('data-lang', l);
+    root.lang = l;
+    langBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-l') === l ? 'true' : 'false'); });
+    try { localStorage.setItem(LANG_KEY, l); } catch (e) {}
+  }
+  langBtns.forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-l')); }); });
+  setLang(currentLang());
+})();
+</script>
+
+</body></html>
